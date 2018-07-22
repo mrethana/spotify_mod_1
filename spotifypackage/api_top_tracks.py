@@ -1,4 +1,4 @@
-from spotifypackage.apidata_genreartist import *
+from apidata_genreartist import *
 
 #function get list of API's to call for each artist's top tracks
 def url_artist_top_tracks():

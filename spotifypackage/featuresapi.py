@@ -1,4 +1,4 @@
-from spotifypackage.createtracks import *
+from createtracks import *
 # import pdb
 #features for all songs API
 feature_apis = []
@@ -19,7 +19,7 @@ def features_dict():
 all_features_dict = features_dict()
 
 
-feature_list = ['danceability', 'energy', 'key', 'loudness', 'mode', 'speechiness', 'acousticness', 'instrumentalness', 'liveness', 'valence', 'tempo']
+feature_list = ['danceability', 'energy', 'valence', 'tempo']
 
 all_features = []
 # def feature_objs(feature_list):

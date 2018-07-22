@@ -1,4 +1,6 @@
-from spotifypackage.featuresapi import *
+from spotifypackage.models import *
+from spotifypackage.dashboard import *
+
 # import pdb
 #converts artist object to artist name
 for artist in Artist.query.all():
@@ -76,6 +78,9 @@ def feature_names():
 def avg_featurevalues_artist(artist, feature_names_list):
    return {feature: feature_values_average(feature, artist) for feature in feature_names_list}
 
+def track_popularity():
+   return {track.name: track.track_popularity for track in Track.query.all()}
+
 
 def create_trace(artist, feature, title, marker, top_track=False):
    dict_values = [value for value in all_featurevalue_artist(artist, top_track)]
@@ -85,6 +90,41 @@ def create_trace(artist, feature, title, marker, top_track=False):
    y = [dict['popularity'] for dict in feature_dict]
    text = [dict['name'] for dict in feature_dict]
    return dict(x=x, y=y, name=title, mode='markers', marker=marker, text=text)
+
+marker1 = dict(
+size = 20,
+color = 'green',)
+marker2 = dict(
+size = 20,
+color = 'blue',
+line = dict(
+width = 2,))
+
+def top_track_title(artist, feature):
+   return artist + ' ' + 'Top Tracks by ' + feature
+
+def oth_track_title(artist, feature):
+   return artist + ' ' + 'Other Tracks by ' + feature
+
+
+def list_of_traces(artist):
+   top_track_trace_list = []
+   oth_track_trace_list = []
+   feature_names = [feature.name for feature in Feature.query.all()]
+   for feature in feature_names:
+       top_track_name = top_track_title(artist, feature)
+       oth_track_name = oth_track_title(artist, feature)
+       top_track_trace_list.append(create_trace(artist, feature, top_track_name , marker1, top_track=True))
+       oth_track_trace_list.append(create_trace(artist, feature, oth_track_name, marker2))
+   final_trace_list = [top_track_trace_list, oth_track_trace_list]
+   return final_trace_list
+
+def list_of_artists_for_dropdown():
+   options = [{'label': 'Artist', 'value': 'Artist'}]
+   artist_list = [artist.name for artist in Artist.query.all()]
+   for artist in artist_list:
+       options.append({'label': artist, 'value': artist})
+   return options
 
 
  # def avg_featurevalues_artist(genre, feature_names_list):

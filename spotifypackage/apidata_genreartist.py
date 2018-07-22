@@ -1,5 +1,5 @@
-from spotifypackage.config import *
-from spotifypackage.models import *
+from config import *
+from models import *
 import pdb
 
 #function to format all artist id's properly for API

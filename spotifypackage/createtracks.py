@@ -1,4 +1,4 @@
-from spotifypackage.api_top_tracks import *
+from api_top_tracks import *
 
 #function to format all artist id's properly for API
 list_of_apis = []

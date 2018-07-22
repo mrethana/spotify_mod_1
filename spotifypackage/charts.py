@@ -1,63 +1,64 @@
 import plotly.plotly as py
 import plotly.graph_objs as go
+from spotifypackage.etl import *
 import numpy as np
 
-trace_dance_top = go.Scatter(
-    x = [.5, .6, .7,.8],
-    y = [90, 100, 82, 77],
-    name = 'Top Tracks',
-    mode = 'markers',
-    marker = dict(
-        size = 20,
-        color = 'green',
-
-    ),
-    text = ['Narcos', 'Motorsport', 'Stir Fry']
-)
-
-trace_dance = go.Scatter(
-    x = [.3, .98, .7,.10],
-    y = [65, 77, 60, 70],
-    name = 'Other Tracks',
-    mode = 'markers',
-    marker = dict(
-        size = 20,
-        color = 'blue',
-        line = dict(
-            width = 2,
-        )
-    ),
-    text = ['Other', 'Other2', 'Other3']
-)
-trace_pitch_top = go.Scatter(
-    x = [.55, .20, .1,.8],
-    y = [90, 100, 82, 77],
-    name = 'Top Tracks',
-    mode = 'markers',
-    marker = dict(
-        size = 20,
-        color = 'green',
-
-    ),
-    text = ['Narcos', 'Motorsport', 'Stir Fry']
-)
-
-trace_pitch = go.Scatter(
-    x = [.8, .5, .03,.60],
-    y = [65, 77, 60, 70],
-    name = 'Other Tracks',
-    mode = 'markers',
-    marker = dict(
-        size = 20,
-        color = 'blue',
-        line = dict(
-            width = 2,
-        )
-    ),
-    text = ['Other', 'Other2', 'Other3']
-)
-
-data = [trace_dance, trace_dance_top, trace_pitch, trace_pitch_top]
+# trace_dance_top = go.Scatter(
+#     x = [.5, .6, .7,.8],
+#     y = [90, 100, 82, 77],
+#     name = 'Top Tracks',
+#     mode = 'markers',
+#     marker = dict(
+#         size = 20,
+#         color = 'green',
+#
+#     ),
+#     text = ['Narcos', 'Motorsport', 'Stir Fry']
+# )
+#
+# trace_dance = go.Scatter(
+#     x = [.3, .98, .7,.10],
+#     y = [65, 77, 60, 70],
+#     name = 'Other Tracks',
+#     mode = 'markers',
+#     marker = dict(
+#         size = 20,
+#         color = 'blue',
+#         line = dict(
+#             width = 2,
+#         )
+#     ),
+#     text = ['Other', 'Other2', 'Other3']
+# )
+# trace_pitch_top = go.Scatter(
+#     x = [.55, .20, .1,.8],
+#     y = [90, 100, 82, 77],
+#     name = 'Top Tracks',
+#     mode = 'markers',
+#     marker = dict(
+#         size = 20,
+#         color = 'green',
+#
+#     ),
+#     text = ['Narcos', 'Motorsport', 'Stir Fry']
+# )
+#
+# trace_pitch = go.Scatter(
+#     x = [.8, .5, .03,.60],
+#     y = [65, 77, 60, 70],
+#     name = 'Other Tracks',
+#     mode = 'markers',
+#     marker = dict(
+#         size = 20,
+#         color = 'blue',
+#         line = dict(
+#             width = 2,
+#         )
+#     ),
+#     text = ['Other', 'Other2', 'Other3']
+# )
+#
+# data = [trace_dance, trace_dance_top, trace_pitch, trace_pitch_top]
 
 # high_annotations=[dict(x='2016-03-01',
 #                        y=df.High.mean(),
