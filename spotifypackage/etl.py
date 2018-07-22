@@ -15,8 +15,14 @@ def artist_name_by_obj(artist_object):
             name = artist.name
             return name
 #return list of tuples for all artist, track pairs
-def all_track_names_artist():
-    return [(track.name, artist_name_by_obj(track.artist)) for track in  Track.query.all()]
+def all_track_names_artist(top_track=False):
+   if top_track==True:
+       return [(track.name, artist_name_by_obj(track.artist)) for track in  Track.query.all()
+       if track.top_track==True]
+   else:
+       return [(track.name, artist_name_by_obj(track.artist)) for track in  Track.query.all()
+       if track.top_track==False]
+
 
 def track_obj_by_name(name):
     return [track for track in Track.query.all() if track.name == name][0]
@@ -36,19 +42,20 @@ def pull_track_features_by_track(name):
     #     pdb.set_trace()
     return [(feature_name_by_id(trackfeature.feature_id) ,trackfeature.value) for trackfeature in TrackFeature.query.all() if trackfeature.track_id == obj_id]
 
-def tracks_for_artist(artist_name):
-    tracks = []
-    for pair in all_track_names_artist():
-        if pair[1] == artist_name:
-            tracks.append(pair[0])
-    return tracks
+def tracks_for_artist(artist_name, top_track=False):
+   tracks = []
+   for pair in all_track_names_artist(top_track):
+       if pair[1] == artist_name:
+           tracks.append(pair[0])
+   return tracks
 
-def all_featurevalue_artist(artist):
-    feature_values = []
-    artist_tracks = tracks_for_artist(artist)
-    for track in artist_tracks:
-        feature_values.append({track:pull_track_features_by_track(track)})
-    return feature_values
+def all_featurevalue_artist(artist, top_track=False):
+   feature_values = []
+   artist_tracks = tracks_for_artist(artist, top_track)
+   for track in artist_tracks:
+       feature_values.append({track:pull_track_features_by_track(track)})
+   return feature_values
+
 
 # def avg_feature_values(feature_name, artist_name):
 #     x = [tf.value for tf in TrackFeature.query.all() if feature_name == feature_name_by_id(tf.feature_id) and artist_name == artist_name_by_obj(artist_obj_by_track_id(tf.track_id))]
@@ -69,6 +76,15 @@ def feature_names():
 def avg_featurevalues_artist(artist, feature_names_list):
    return {feature: feature_values_average(feature, artist) for feature in feature_names_list}
 
+
+def create_trace(artist, feature, title, marker, top_track=False):
+   dict_values = [value for value in all_featurevalue_artist(artist, top_track)]
+   popularity_dict = track_popularity()
+   feature_dict = [{'name': key, feature:tuple[1], 'popularity': popularity_dict[key]} for item in dict_values for key,value in item.items() for tuple in value if tuple[0] == feature]
+   x = [dict[feature] for dict in feature_dict]
+   y = [dict['popularity'] for dict in feature_dict]
+   text = [dict['name'] for dict in feature_dict]
+   return dict(x=x, y=y, name=title, mode='markers', marker=marker, text=text)
 
 
  # def avg_featurevalues_artist(genre, feature_names_list):
