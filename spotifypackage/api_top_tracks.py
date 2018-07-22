@@ -31,11 +31,10 @@ def artist_top_tracks(top_tracks_dict):
     return top_track_ids
 
 def check_top_track(top_tracks, spotify_id):
-    for track in top_tracks:
-        if track == spotify_id:
-            return True
-        else:
-            return False
+    if spotify_id in top_tracks:
+        return True
+    else:
+        return False
 
 
 top_tracks = artist_top_tracks(top_tracks_dict) #list of top tracks
