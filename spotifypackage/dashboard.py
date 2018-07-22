@@ -10,6 +10,7 @@ import dash
 from dash.dependencies import Input, Output
 import dash_core_components as dcc
 import dash_html_components as html
+import pdb
 
 
 app.layout = html.Div(children= [html.H1('Artist Features Plot'),dcc.Dropdown(
@@ -32,11 +33,10 @@ def generate_scatter(scatter_data):
 )
 
 def filter_plot(input_value):
-    # pdb.set_trace()
-    # using global to make sure we are accessing the imported data object
-    global data
-    trace_list = list_of_traces(input_value)
-    top_tracks = trace_list[0]
-    oth_tracks = trace_list[1]
-    data = top_tracks + oth_tracks
-    return generate_scatter(data)
+   global data
+   trace_list = list_of_traces(input_value)
+   top_tracks = tempo_normalization_list(trace_list[0])
+   oth_tracks = tempo_normalization_list(trace_list[1])
+   data = top_tracks + oth_tracks
+   pdb.set_trace()
+   return generate_scatter(data)

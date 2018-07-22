@@ -125,7 +125,21 @@ def list_of_artists_for_dropdown():
    for artist in artist_list:
        options.append({'label': artist, 'value': artist})
    return options
+def tempo_normalization(val):
+   tempo_id = [feature.id for feature in Feature.query.all() if feature.name == 'tempo'][0]
+   tempo_values = [tf.value for tf in TrackFeature.query.all() if tf.feature_id == tempo_id]
+   min_val = min(tempo_values)
+   max_val = max(tempo_values)
+   # return [round(((val-min_val)/(max_val-min_val)),2) for val in tempo_values]
+   tempo_val = round(((val-min_val)/(max_val-min_val)),2)
+   return tempo_val
 
+def tempo_normalization_list(tracks_list):
+   for dict in tracks_list:
+       if 'tempo' in dict['name']:
+           for val in dict['x']:
+               dict['x'][dict['x'].index(val)] = tempo_normalization(val)
+   return tracks_list
 
  # def avg_featurevalues_artist(genre, feature_names_list):
  #    return {feature: feature_values_average(feature, artist) for feature in feature_names_list}

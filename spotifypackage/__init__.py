@@ -15,6 +15,6 @@ db=SQLAlchemy(server)
 
 app = dash.Dash(__name__, server = server, url_base_pathname = '/dashboard')
 
-from spotifypackage.dashboard import app
+from spotifypackage.dashboard import *
 # from spotifypackage.seed import *
 from spotifypackage.etl import *
