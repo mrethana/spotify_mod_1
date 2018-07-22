@@ -19,7 +19,7 @@ def features_dict():
 all_features_dict = features_dict()
 
 
-feature_list = ['danceability', 'energy', 'valence', 'tempo']
+feature_list = ['danceability', 'energy','acousticness', 'valence', 'tempo']
 
 all_features = []
 # def feature_objs(feature_list):
