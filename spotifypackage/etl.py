@@ -201,7 +201,6 @@ def box_y_values(genre_input):
         if second_value > 10:
             second_value_list[second_value_list.index(second_value)] = tempo_normalization(second_value)
     final = [values_only] + [second_value_list]
-
     return final
 
 def box_x_values(genre_input):
@@ -213,6 +212,23 @@ def genres_names_box(genre_input):
     artists_genre = [genre.artists for genre in Genre.query.all() if genre.name == genre_input][0]
     names = [artist.name for artist in artists_genre]
     return names
+
+
+def artist_box_y_values(artist_name):
+    artist_obj = [artist for artist in Artist.query.all() if artist.name == artist_name][0]
+    id_list = [track.id for track in artist_obj.tracks]
+    values = [tf.value for tf in TrackFeature.query.all() if tf.track_id in id_list]
+    for value in values:
+        if value > 10:
+            values[values.index(value)] = tempo_normalization(value)
+    return values
+
+def artist_box_x_values(artist_name):
+    features = ['danceability', 'energy', 'acousticness', 'valence', 'tempo']
+    return int((len(artist_box_y_values(artist_name))/5)) * features
+
+
+
 def track_feature_values(track, feature):
    trackfeatures = [trackfeature for trackfeature in TrackFeature.query.all()]
    feature_id=feature.id
@@ -238,6 +254,11 @@ def create_histogram():
    x4=hist['tempo']
    hist_data = [x1, x2, x3, x4]
    return ff.create_distplot(hist_data, group_labels, bin_size=.03)
+
+histogram = create_histogram()
+histogram['layout'].update(title='Distribution of Feature Values Across Tracks')
+
+
 # def names_from_genre(genre_input):
 #     artists_genre = [genre.artists for genre in Genre.query.all() if genre.name == genre_input][0]
 #     return artists_genre

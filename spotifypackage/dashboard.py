@@ -14,9 +14,10 @@ import pdb
 
 
 
-app.layout = html.Div([
+app.layout = html.Div(style={'fontFamily': 'Sans-Serif'}, children=[
    html.H1('Spotify Feature Analysis', style={
            'textAlign': 'center', 'margin': '48px 0', 'fontFamily': 'Sans-Serif'}),
+   dcc.Markdown('[Spotify Audio Feature Guide](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/)'),
    dcc.Tabs(id="tabs", children=[
        dcc.Tab(label='Average Feature Values', children=[
            html.Div([
@@ -25,7 +26,8 @@ dcc.Graph(
       figure={
           'data': all_bars(),
           'layout': {
-              'title': 'Average Feature Values by Artist'}})
+              'title': 'Average Feature Values by Artist'}}),
+dcc.Markdown('*Note: data for tempo normalized to 0-1 range*')
            ])
        ]),
        dcc.Tab(label='Track Values by Feature', children=[
@@ -35,10 +37,11 @@ dcc.Dropdown(
           options=list_of_artists_for_dropdown(),
           placeholder="Select an artist", value ='Artist'
       ),
-html.Div(id= 'plot-container')
+html.Div(id= 'plot-container'),
+dcc.Markdown('*Note: for all features, data for tempo normalized to 0-1 range*')
            ])
        ]),
-dcc.Tab(label='Artist Comparisons', children=[
+dcc.Tab(label='Genre Comparisons', children=[
          html.Div([
 dcc.Dropdown(
         id='select-genre',
@@ -46,19 +49,37 @@ dcc.Dropdown(
           {'label': 'Pop', 'value': 'pop'}],
         placeholder="Select a Genre", value ='Genre'
     ),
-html.Div(id= 'box-container')
+html.Div(id= 'box-container'),
+dcc.Markdown('*Note: for all features, data for tempo normalized to 0-1 range*')
          ])
      ]),
        dcc.Tab(label='Feature Distribution', children=[
-           html.Div([
-html.H1('Distribution Plot'),dcc.Graph(
+           html.Div([dcc.Graph(
       id='dist-plot',
-      figure=create_histogram())
-           ])
-       ])]
+      figure=histogram),dcc.Markdown(
+      '*Note: data for tempo normalized to 0-1 range and acousticness excluded from analysis due to extreme skew*'
+           )])
+       ])
+,
+dcc.Tab(label='Artist Comparisons', children=[
+       html.Div([
+dcc.Dropdown(
+      id='select-artist-1',
+      options=list_of_artists_for_dropdown(),
+      placeholder="Select an Artist", value ='Artist'
+  ),dcc.Dropdown(
+          id='select-artist-2',
+          options=list_of_artists_for_dropdown(),
+          placeholder="Select another Artist", value ='Artist_2'
+      ),
+html.Div(id= 'artist-box-container'),
+dcc.Markdown('*Note: for all features, data for tempo normalized to 0-1 range*')
+       ])
+   ])
+   ]
 ,
        style={
-   'width': '80%',
+   'width': '100%',
    'fontFamily': 'Sans-Serif',
    'margin-left': 'auto',
    'margin-right': 'auto',
@@ -77,6 +98,16 @@ html.H1('Distribution Plot'),dcc.Graph(
 ])
 
 def generate_box(box_data):
+   return dcc.Graph(
+   id='generation',
+   figure={
+   'data': box_data,'layout': go.Layout(
+      xaxis={'title': 'feature'},
+      yaxis={'title': 'feature value'},
+      boxmode='group',
+   )})
+
+def generate_artist_box(box_data):
    return dcc.Graph(
    id='generation',
    figure={
@@ -122,6 +153,7 @@ def filter_plot(input_value):
     data = top_tracks + oth_tracks
     return generate_scatter(data)
 
+
 @app.callback(Output(component_id = 'box-container', component_property ='children'),
 [Input(component_id = 'select-genre',component_property = 'value')]
 )
@@ -131,7 +163,15 @@ def filter_box(input_value):
     trace_list = [trace0, trace1]
     return generate_box(trace_list)
 
-
+@app.callback(Output(component_id = 'artist-box-container', component_property ='children'),
+[Input(component_id = 'select-artist-1',component_property = 'value'),
+Input(component_id = 'select-artist-2',component_property = 'value')]
+)
+def filter_artist_box(input_value, input_value_2):
+    trace0 = go.Box(y=artist_box_y_values(input_value),x=artist_box_x_values(input_value),name=input_value,marker=dict(color='#3D9970'))
+    trace1 = go.Box(y=artist_box_y_values(input_value_2),x=artist_box_x_values(input_value_2),name=input_value_2,marker=dict(color='#FF4136'))
+    trace_list = [trace0, trace1]
+    return generate_artist_box(trace_list)
 
 
 
