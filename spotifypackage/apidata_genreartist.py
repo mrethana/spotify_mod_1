@@ -2,6 +2,9 @@ from config import *
 from models import *
 import pdb
 
+#to add: check artist genre using artist_clean and add them to that respective list in config
+#this will update the genre_artist
+
 #function to format all artist id's properly for API
 def url_of_artist_ids():
     x=[id for id in dict_of_ids.values()]
@@ -28,9 +31,9 @@ genre_obj_list = get_all_genres()
 def genre_artist(spotify_id):
     if spotify_id == "64KEffDW9EtZ1y2vBYgq8T":
         genre = 'edm_dance'
-    elif spotify_id == "6VuMaDnrHyPL1p4EHjYLi7":
+    elif spotify_id in pop_list:
         genre = 'pop'
-    elif spotify_id == "6oMuImdp5ZcFhWP0ESe6mG":
+    elif spotify_id in hiphop_list:
         genre = 'hiphop'
     return genre
 

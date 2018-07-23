@@ -1,5 +1,5 @@
 from apidata_genreartist import *
-
+#append any albums we need for comparison in url_album_ids
 #function get list of API's to call for each artist's top tracks
 def url_artist_top_tracks():
     x=[id for id in dict_of_ids.values()]
@@ -42,12 +42,14 @@ top_tracks = artist_top_tracks(top_tracks_dict) #list of top tracks
 #dictionary of frequency of albums per artist- only return top 2
 def album_freq_dict(all_album_ids):
     all_ids = [{'id' :album, 'freq':all_album_ids.count(album)} for album in set(all_album_ids)]
-    return sorted(all_ids, key = lambda k :k['freq'], reverse = True)[:2]
+    return sorted(all_ids, key = lambda k :k['freq'], reverse = True)[:4]
 
 #urls for get album API's for each album id
 def url_album_ids():
     list_album_ids = [album['id'] for album in album_freq_dict(all_album_ids)]
     list_album_ids.append('0xi4cOWPUHjctyYU8ypCOB') #append marshmello album
+    list_album_ids.append('3OZgEywV4krCZ814pTJWr7') #append ariana
+    list_album_ids.append('2ANVost0y2y52ema1E9xAZ') #append mj
     merge = '%2c'.join(list_album_ids)
     return "https://api.spotify.com/v1/albums"+ "?ids=" + merge
 
