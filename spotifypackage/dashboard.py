@@ -46,7 +46,7 @@ dcc.Tab(label='Genre Comparisons', children=[
 dcc.Dropdown(
         id='select-genre',
         options=[{'label': 'Hip-Hop', 'value': 'hiphop'},
-          {'label': 'Pop', 'value': 'pop'}],
+          {'label': 'Pop', 'value': 'pop'}, {'label':'Rock', 'value':'rock'}, {'label': 'EDM/Dance','value':'edm_dance'}, {'label':'Country', 'value':'country'}],
         placeholder="Select a Genre", value ='Genre'
     ),
 html.Div(id= 'box-container'),
@@ -158,8 +158,8 @@ def filter_plot(input_value):
 [Input(component_id = 'select-genre',component_property = 'value')]
 )
 def filter_box(input_value):
-    trace0 = go.Box(y=box_y_values(input_value)[0],x=box_x_values(input_value),name=genres_names_box(input_value)[0],marker=dict(color='#3D9970'))
-    trace1 = go.Box(y=box_y_values(input_value)[1],x=box_x_values(input_value),name=genres_names_box(input_value)[1],marker=dict(color='#FF4136'))
+    trace0 = go.Box(y=box_y_values(input_value)[0],x=box_x_values(input_value)[0],name=genres_names_box(input_value)[0],marker=dict(color='#3D9970'))
+    trace1 = go.Box(y=box_y_values(input_value)[1],x=box_x_values(input_value)[1],name=genres_names_box(input_value)[1],marker=dict(color='#FF4136'))
     trace_list = [trace0, trace1]
     return generate_box(trace_list)
 

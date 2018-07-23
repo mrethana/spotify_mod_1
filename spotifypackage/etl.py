@@ -206,7 +206,10 @@ def box_y_values(genre_input):
 def box_x_values(genre_input):
     features = ['danceability', 'energy', 'acousticness', 'valence', 'tempo']
     list_features = [feature for feature in features]
-    return int((len(box_y_values(genre_input)[0])/5)) * list_features
+    first_value = int((len(box_y_values(genre_input)[0])/5)) * list_features
+    second_value = int((len(box_y_values(genre_input)[1])/5)) * list_features
+    final = [first_value] + [second_value]
+    return final
 
 def genres_names_box(genre_input):
     artists_genre = [genre.artists for genre in Genre.query.all() if genre.name == genre_input][0]

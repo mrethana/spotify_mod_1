@@ -29,7 +29,7 @@ genre_obj_list = get_all_genres()
 #Create genres for artists
 
 def genre_artist(spotify_id):
-    if spotify_id == "64KEffDW9EtZ1y2vBYgq8T":
+    if spotify_id in edm_dance_list:
         genre = 'edm_dance'
     elif spotify_id in pop_list:
         genre = 'pop'

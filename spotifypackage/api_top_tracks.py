@@ -66,6 +66,9 @@ def url_album_ids():
     list_album_ids.append('1tuM8yBePaekEruGsH2J79') #append aerosmith
     list_album_ids.append('52E4RP7XDzalpIrOgSTgiQ') #append mj
     list_album_ids.append('3w7TTi80vZApF0rQE5DMYb') #append crow
+    list_album_ids.append('3WW11Jf3O3lfFRF5wNMqkn') #beegees append
+    list_album_ids.append('3iLrVuA1k7onNmZTuUQH4u') #carrie append
+    list_album_ids.append('6KOWjVP0mh5rOqmzm4tkPD') #falloutappend
     # list_album_ids.extend(unique_drake())
     merge = '%2c'.join(list_album_ids)
     return "https://api.spotify.com/v1/albums"+ "?ids=" + merge
