@@ -91,7 +91,11 @@ def create_trace(artist, feature, title, marker, top_track=False):
    x = [dict[feature] for dict in feature_dict]
    y = [dict['popularity'] for dict in feature_dict]
    text = [dict['name'] for dict in feature_dict]
-   return dict(x=x, y=y, name=title, mode = 'markers', marker=marker,opacity = 0.7, text=text)
+   if top_track == True:
+       opacity = 1.0
+   else:
+       opacity = 0.5
+   return dict(x=x, y=y, name=title, mode = 'markers', marker=marker,opacity = opacity, text=text)
 
 def marker_color(feature):
    if feature == 'danceability':
@@ -128,11 +132,14 @@ def list_of_traces(artist):
    feature_names = [feature.name for feature in Feature.query.all()]
    for feature in feature_names:
        color = marker_color(feature)
-       marker = dict(size = 12, color = color,line = dict(width = 2,))
+       top_marker = dict(size = 12, color = color)
+       oth_marker = dict(size = 12, color = color, line = dict(
+             color = 'black',
+             width = 2))
        top_track_name = top_track_title(feature)
        oth_track_name = oth_track_title(feature)
-       top_track_trace_list.append(create_trace(artist, feature, top_track_name , marker, top_track=True))
-       oth_track_trace_list.append(create_trace(artist, feature, oth_track_name, marker))
+       top_track_trace_list.append(create_trace(artist, feature, top_track_name , top_marker, top_track=True))
+       oth_track_trace_list.append(create_trace(artist, feature, oth_track_name, oth_marker))
    final_trace_list = [top_track_trace_list, oth_track_trace_list]
    return final_trace_list
 

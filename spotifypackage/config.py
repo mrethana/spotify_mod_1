@@ -10,7 +10,7 @@ rock_list = ['7Ey4PD4MYsKc5I2dolUwbH']
 country_list = ["4TKTii6gnOnUXQHyuo9JaD"]
 
 #Key for api's
-api_key = "BQBKFIpzPDwej7B0Bp7y-eFknKwa2EZPixZQtx_nRZ9lbHmjA-XOAv5uWActw3FxvzpmUcNvXw93D08CbnUTXnHZTdLsNfnSGmAJ5rw6j0P318YPHmTu2QFUpuFk-hp2SJO1jvjrG_Ck"
+api_key = "BQCbEXWGowHNumssyTKkQ3qw87SnHrSnCSihhJuMAevm260LZrl4iVIe24u-Oys9k8AavoaqoQ0YSOKBi540Drod0nzqspJafEQ1eAxbcvickmT5enCxsc6B1j75iWMuaCkugjD6-Fuw"
 #Headers for Spotify API
 
 headers = {'Accept': 'application/json',
