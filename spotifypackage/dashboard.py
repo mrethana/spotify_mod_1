@@ -24,7 +24,11 @@ dcc.Dropdown(
             options=list_of_artists_for_dropdown(),
             placeholder="Select an artist", value ='Artist'
         ),
-html.Div(id= 'graph-container'),
+html.Div(id= 'graph-container')
+# dcc.Graph(id = 'drake',
+# figure = {
+# 'data': drake(),
+# 'layout': {'title' :  'Drake Time Lapse', 'updatemenus':updatemenus, 'sliders':sliders}})
 
 ])
 

@@ -91,7 +91,20 @@ def create_trace(artist, feature, title, marker, top_track=False):
    x = [dict[feature] for dict in feature_dict]
    y = [dict['popularity'] for dict in feature_dict]
    text = [dict['name'] for dict in feature_dict]
-   return dict(x=x, y=y, name=title, mode = 'markers', marker=marker, text=text)
+   return dict(x=x, y=y, name=title, mode = 'markers', marker=marker,opacity = 0.7, text=text)
+
+def marker_color(feature):
+   if feature == 'danceability':
+       color = 'red'
+   elif feature == 'energy':
+       color = 'blue'
+   elif feature == 'acousticness':
+       color = 'green'
+   elif feature == 'valence':
+       color = 'purple'
+   elif feature == 'tempo':
+       color = 'orange'
+   return color
 
 marker1 = dict(
 size = 16,
@@ -114,10 +127,12 @@ def list_of_traces(artist):
    oth_track_trace_list = []
    feature_names = [feature.name for feature in Feature.query.all()]
    for feature in feature_names:
+       color = marker_color(feature)
+       marker = dict(size = 12, color = color,line = dict(width = 2,))
        top_track_name = top_track_title(feature)
        oth_track_name = oth_track_title(feature)
-       top_track_trace_list.append(create_trace(artist, feature, top_track_name , marker1, top_track=True))
-       oth_track_trace_list.append(create_trace(artist, feature, oth_track_name, marker2))
+       top_track_trace_list.append(create_trace(artist, feature, top_track_name , marker, top_track=True))
+       oth_track_trace_list.append(create_trace(artist, feature, oth_track_name, marker))
    final_trace_list = [top_track_trace_list, oth_track_trace_list]
    return final_trace_list
 
@@ -158,6 +173,13 @@ def all_bars():
     for artist in x:
         all_bars_list.append(bar_trace(artist))
     return all_bars_list
+
+# def drake():
+#     trace_list = list_of_traces('Drake')
+#     top_tracks = tempo_normalization_list(trace_list[0])
+#     oth_tracks = tempo_normalization_list(trace_list[1])
+#     data = top_tracks + oth_tracks
+#     return data
 #dict(x=x, y=y, name=title, mode = 'markers', marker=marker, text=text)
  # def avg_featurevalues_artist(genre, feature_names_list):
  #    return {feature: feature_values_average(feature, artist) for feature in feature_names_list}

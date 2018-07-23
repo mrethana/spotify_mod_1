@@ -63,3 +63,19 @@ updatemenus = list([
         # yanchor = 'top'
     ),
             ])
+dates = [album.release_date for album in Album.query.all() if album.artist_id == 7]
+steps = []
+for i in range(len(dates)):
+    step = dict(
+        method = 'restyle',
+        args = ['visible', [False] * len(dates)],
+    )
+    step['args'][1][i] = True # Toggle i'th trace to "visible"
+    steps.append(step)
+
+sliders = [dict(
+    active = 10,
+    currentvalue = {"prefix": "Frequency: "},
+    pad = {"t": 50},
+    steps = steps
+)]

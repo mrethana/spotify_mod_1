@@ -15,7 +15,22 @@ def top_tracks_dict():
     return list_dicts
 top_tracks_dict = top_tracks_dict() #variable for dictionary of top tracks
 
-
+# def url_drake_albums():
+#     url = "https://api.spotify.com/v1/artists/{id}/albums".format(id='3TVXtAsR1Inumwj472S9r4')+'?country=US' #for artist_id in x]
+#     response_drake = requests.get(url, headers=headers)
+#     drake_dict = json.loads(response_drake.content)
+#     return [item for item in drake_dict['items']]
+#
+# drake_names = ['Scorpion', 'Nothing Was The Same']
+# def unique_drake():
+#     list_ids = []
+#     for item in url_drake_albums():
+#         if item['name'] in drake_names:
+#             pass
+#         else:
+#             list_ids.append(item['id'])
+#             drake_names.append(item['name'])
+#     return list_ids
 
 #Get artist top tracks
 all_track_ids = []
@@ -42,14 +57,16 @@ top_tracks = artist_top_tracks(top_tracks_dict) #list of top tracks
 #dictionary of frequency of albums per artist- only return top 2
 def album_freq_dict(all_album_ids):
     all_ids = [{'id' :album, 'freq':all_album_ids.count(album)} for album in set(all_album_ids)]
-    return sorted(all_ids, key = lambda k :k['freq'], reverse = True)[:4]
+    return sorted(all_ids, key = lambda k :k['freq'], reverse = True)[:3]
 
 #urls for get album API's for each album id
 def url_album_ids():
     list_album_ids = [album['id'] for album in album_freq_dict(all_album_ids)]
     list_album_ids.append('0xi4cOWPUHjctyYU8ypCOB') #append marshmello album
-    list_album_ids.append('3OZgEywV4krCZ814pTJWr7') #append ariana
-    list_album_ids.append('2ANVost0y2y52ema1E9xAZ') #append mj
+    list_album_ids.append('1tuM8yBePaekEruGsH2J79') #append aerosmith
+    list_album_ids.append('52E4RP7XDzalpIrOgSTgiQ') #append mj
+    list_album_ids.append('3w7TTi80vZApF0rQE5DMYb') #append crow
+    # list_album_ids.extend(unique_drake())
     merge = '%2c'.join(list_album_ids)
     return "https://api.spotify.com/v1/albums"+ "?ids=" + merge
 

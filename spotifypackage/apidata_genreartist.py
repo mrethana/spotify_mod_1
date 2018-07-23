@@ -35,6 +35,10 @@ def genre_artist(spotify_id):
         genre = 'pop'
     elif spotify_id in hiphop_list:
         genre = 'hiphop'
+    elif spotify_id in country_list:
+        genre = 'country'
+    elif spotify_id in rock_list:
+        genre = 'rock'
     return genre
 
 
