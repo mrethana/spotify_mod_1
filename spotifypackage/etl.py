@@ -2,6 +2,7 @@ from spotifypackage.models import *
 # from spotifypackage.dashboard import *
 import pandas as pd
 import pdb
+import plotly.figure_factory as ff
 
 # import pdb
 #converts artist object to artist name
@@ -180,6 +181,73 @@ def all_bars():
     for artist in x:
         all_bars_list.append(bar_trace(artist))
     return all_bars_list
+
+
+def genres_artists(genre_input):
+    artists_genre = [genre.artists for genre in Genre.query.all() if genre.name == genre_input][0]
+    dict_values = []
+    for artist in artists_genre:
+        dict_values.append(all_featurevalue_artist(artist.name, top_track = True))
+    return dict_values
+
+def box_y_values(genre_input):
+    artist_dict = [artists_dict for artists_dict in genres_artists(genre_input)]
+    values_only = [feature[1] for artist in artist_dict[0] for track in artist.values() for feature in track]
+    for value in values_only:
+        if value > 10:
+            values_only[values_only.index(value)] = tempo_normalization(value)
+    second_value_list = [feature[1] for artist in artist_dict[1] for track in artist.values() for feature in track]
+    for second_value in second_value_list:
+        if second_value > 10:
+            second_value_list[second_value_list.index(second_value)] = tempo_normalization(second_value)
+    final = [values_only] + [second_value_list]
+
+    return final
+
+def box_x_values(genre_input):
+    features = ['danceability', 'energy', 'acousticness', 'valence', 'tempo']
+    list_features = [feature for feature in features]
+    return int((len(box_y_values(genre_input)[0])/5)) * list_features
+
+def genres_names_box(genre_input):
+    artists_genre = [genre.artists for genre in Genre.query.all() if genre.name == genre_input][0]
+    names = [artist.name for artist in artists_genre]
+    return names
+def track_feature_values(track, feature):
+   trackfeatures = [trackfeature for trackfeature in TrackFeature.query.all()]
+   feature_id=feature.id
+   track_id=track.id
+   for trackfeature in trackfeatures:
+       if trackfeature.track_id == track_id and trackfeature.feature_id == feature_id:
+           return trackfeature.value
+
+def create_histogram():
+   group_labels = [feature.name for feature in Feature.query.all() if feature.name != 'acousticness']
+   top_tracks = [track for track in Track.query.all() if track.top_track==True]
+   features = [feature for feature in Feature.query.all()]
+   hist = {'danceability': [], 'energy': [], 'acousticness': [], 'valence': [], 'tempo': []}
+   for feature in features:
+       for track in top_tracks:
+           hist[feature.name].append(track_feature_values(track, feature))
+   for item in hist['tempo']:
+       hist['tempo'][hist['tempo'].index(item)] = tempo_normalization(item)
+   x1=hist['danceability']
+   x2=hist['energy']
+   # x3=hist['acousticness']
+   x3=hist['valence']
+   x4=hist['tempo']
+   hist_data = [x1, x2, x3, x4]
+   return ff.create_distplot(hist_data, group_labels, bin_size=.03)
+# def names_from_genre(genre_input):
+#     artists_genre = [genre.artists for genre in Genre.query.all() if genre.name == genre_input][0]
+#     return artists_genre
+
+# def all_featurevalue_artist(artist, top_track=False):
+#    feature_values = []
+#    artist_tracks = tracks_for_artist(artist, top_track)
+#    for track in artist_tracks:
+#        feature_values.append({track:pull_track_features_by_track(track)})
+#    return feature_values
 
 # def drake():
 #     trace_list = list_of_traces('Drake')

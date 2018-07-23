@@ -63,19 +63,60 @@ updatemenus = list([
         # yanchor = 'top'
     ),
             ])
-dates = [album.release_date for album in Album.query.all() if album.artist_id == 7]
-steps = []
-for i in range(len(dates)):
-    step = dict(
-        method = 'restyle',
-        args = ['visible', [False] * len(dates)],
-    )
-    step['args'][1][i] = True # Toggle i'th trace to "visible"
-    steps.append(step)
+# dates = [album.release_date for album in Album.query.all() if album.artist_id == 7]
+# steps = []
+# for i in range(len(dates)):
+#     step = dict(
+#         method = 'restyle',
+#         args = ['visible', [False] * len(dates)],
+#     )
+#     step['args'][1][i] = True # Toggle i'th trace to "visible"
+#     steps.append(step)
+#
+# sliders = [dict(
+#     active = 10,
+#     currentvalue = {"prefix": "Frequency: "},
+#     pad = {"t": 50},
+#     steps = steps
+# )]
 
-sliders = [dict(
-    active = 10,
-    currentvalue = {"prefix": "Frequency: "},
-    pad = {"t": 50},
-    steps = steps
-)]
+# x = ['danceability', 'danceability', 'danceability', 'danceability', 'danceability','danceability','danceability', 'danceability', 'danceability', 'danceability', 'danceability','danceability'
+# ,'danceability', 'danceability', 'danceability', 'danceability', 'danceability','danceability','danceability','danceability']
+#
+# trace0 = go.Box(
+#     y=features_values('danceability','Migos'),
+#     x=box_x_values(genre_input),
+#     name='Migos',
+#     marker=dict(
+#         color='#3D9970'
+#     )
+# )
+# trace1 = go.Box(
+#     y=features_values('danceability','The Notorious B.I.G.'),
+#     x=box_x_values(genre_input),
+#     name='The Notorious B.I.G.',
+#     marker=dict(
+#         color='#FF4136'
+#     )
+# )
+#
+# data_box = [trace0, trace1]
+# layout_box = go.Layout(
+#     yaxis=dict(
+#         title='normalized moisture',
+#         zeroline=False
+#     ),
+#     boxmode='group'
+# )
+
+# html.Div([
+# dcc.Graph(
+# id='generation',
+# figure={
+# 'data': data_box,'layout': go.Layout(
+#    xaxis={'title': 'feature'},
+#    yaxis={'title': 'feature value'},
+#    boxmode='group',
+# )})
+# ])
+# ]),
