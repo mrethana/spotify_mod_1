@@ -1,6 +1,7 @@
 from spotifypackage.models import *
 from spotifypackage.dashboard import *
 import pandas as pd
+import pdb
 
 # import pdb
 #converts artist object to artist name
@@ -90,7 +91,7 @@ def create_trace(artist, feature, title, marker, top_track=False):
    x = [dict[feature] for dict in feature_dict]
    y = [dict['popularity'] for dict in feature_dict]
    text = [dict['name'] for dict in feature_dict]
-   return dict(x=x, y=y, name=title, mode='markers', marker=marker, text=text)
+   return dict(x=x, y=y, name=title, mode = 'markers', marker=marker, text=text)
 
 marker1 = dict(
 size = 16,
@@ -142,5 +143,14 @@ def tempo_normalization_list(tracks_list):
                dict['x'][dict['x'].index(val)] = tempo_normalization(val)
    return tracks_list
 
+def bar_trace(artist_name):
+    avg_features = avg_featurevalues_artist(artist_name, feature_names())
+    x = [feature for feature in avg_features.keys()]
+    y = [value for value in avg_features.values()]
+    y[4] = tempo_normalization(y[4])
+    return [{'x': x, 'y': y, 'type': 'bar', 'name': 'Average Feature Values'}]
+
+    [{'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'Average Feature Values'}]
+#dict(x=x, y=y, name=title, mode = 'markers', marker=marker, text=text)
  # def avg_featurevalues_artist(genre, feature_names_list):
  #    return {feature: feature_values_average(feature, artist) for feature in feature_names_list}
