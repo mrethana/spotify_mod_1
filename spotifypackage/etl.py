@@ -148,9 +148,16 @@ def bar_trace(artist_name):
     x = [feature for feature in avg_features.keys()]
     y = [value for value in avg_features.values()]
     y[4] = tempo_normalization(y[4])
-    return [{'x': x, 'y': y, 'type': 'bar', 'name': 'Average Feature Values'}]
+    return {'x': x, 'y': y, 'type': 'bar', 'name': artist_name}
 
-    [{'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'Average Feature Values'}]
+    #[{'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'Average Feature Values'}]
+
+def all_bars():
+    all_bars_list = []
+    x = [artist.name for artist in Artist.query.all()]
+    for artist in x:
+        all_bars_list.append(bar_trace(artist))
+    return all_bars_list
 #dict(x=x, y=y, name=title, mode = 'markers', marker=marker, text=text)
  # def avg_featurevalues_artist(genre, feature_names_list):
  #    return {feature: feature_values_average(feature, artist) for feature in feature_names_list}

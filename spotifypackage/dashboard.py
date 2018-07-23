@@ -13,17 +13,18 @@ import dash_html_components as html
 import pdb
 
 
-app.layout = html.Div(children= [html.H1('Artist Features Plot'),dcc.Dropdown(
+app.layout = html.Div(children= [html.H1('Artist Features Plot'),dcc.Graph(
+        id='example-graph',
+        figure={
+            'data': all_bars(),
+            'layout': {
+                'title': 'Average Feature Values'}}),
+dcc.Dropdown(
             id='select-artist1',
             options=list_of_artists_for_dropdown(),
             placeholder="Select an artist", value ='Artist'
-        ),html.Div(id = 'graph-container'),
-dcc.Dropdown(
-            id='select-artist2',
-            options=list_of_artists_for_dropdown(),
-            placeholder="Select an artist", value ='Artist'
         ),
-html.Div(id= 'bar-container'),
+html.Div(id= 'graph-container'),
 
 ])
 
@@ -62,18 +63,18 @@ def filter_plot(input_value):
     data = top_tracks + oth_tracks
     return generate_scatter(data)
 
-@app.callback(Output(component_id = 'bar-container', component_property ='children'), #sorting the values of children within food_table
-[Input(component_id = 'select-artist2',component_property = 'value' )]
-)
-
-def generate_bar(input_value):
-    return dcc.Graph(
-            id='example-graph',
-            figure={
-                'data': bar_trace(input_value),
-                'layout': {
-                    'title': 'Average Feature Values'}})
-
-
+# @app.callback(Output(component_id = 'bar-container', component_property ='children'), #sorting the values of children within food_table
+# [Input(component_id = 'select-artist2',component_property = 'value' )]
+# )
+#
+# def generate_bar(input_value):
+#     return dcc.Graph(
+#             id='example-graph',
+#             figure={
+#                 'data': bar_trace(input_value),
+#                 'layout': {
+#                     'title': 'Average Feature Values'}})
+#
+#
 
 # def filter_bar(bar_value):
