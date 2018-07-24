@@ -25,8 +25,9 @@ dcc.Graph(
       id='example-graph',
       figure={
           'data': all_bars(),
-          'layout': {
-              'title': 'Average Feature Values by Artist'}}),
+          'layout': go.Layout(
+              xaxis={'title': 'Feature'},
+              yaxis={'title': 'Avg Feature Value'})}),
 dcc.Markdown('*Note: data for tempo normalized to 0-1 range*')
            ])
        ]),
@@ -119,10 +120,11 @@ def generate_artist_box(box_data):
 
 
 def generate_scatter(scatter_data):
-    return dcc.Graph(id = 'artist_features',
-    figure = {
-    'data': scatter_data,
-    'layout': {'title' :  'Artist Features', 'updatemenus': updatemenus}})
+   return dcc.Graph(id = 'artist_features',
+   figure = {
+   'data': scatter_data,
+   'layout': go.Layout(updatemenus=updatemenus,
+   xaxis={'title': 'feature'}, yaxis={'title': 'popularity'})})
 
 def generate_bar(bar_data):
     return dcc.Graph(
@@ -158,8 +160,8 @@ def filter_plot(input_value):
 [Input(component_id = 'select-genre',component_property = 'value')]
 )
 def filter_box(input_value):
-    trace0 = go.Box(y=box_y_values(input_value)[0],x=box_x_values(input_value)[0],name=genres_names_box(input_value)[0],marker=dict(color='#3D9970'))
-    trace1 = go.Box(y=box_y_values(input_value)[1],x=box_x_values(input_value)[1],name=genres_names_box(input_value)[1],marker=dict(color='#FF4136'))
+    trace0 = go.Box(y=box_y_values(input_value)[0],x=box_x_values(input_value)[0],name=genres_names_box(input_value)[0],marker=dict(color='purple'))
+    trace1 = go.Box(y=box_y_values(input_value)[1],x=box_x_values(input_value)[1],name=genres_names_box(input_value)[1],marker=dict(color='blue'))
     trace_list = [trace0, trace1]
     return generate_box(trace_list)
 
@@ -168,8 +170,8 @@ def filter_box(input_value):
 Input(component_id = 'select-artist-2',component_property = 'value')]
 )
 def filter_artist_box(input_value, input_value_2):
-    trace0 = go.Box(y=artist_box_y_values(input_value),x=artist_box_x_values(input_value),name=input_value,marker=dict(color='#3D9970'))
-    trace1 = go.Box(y=artist_box_y_values(input_value_2),x=artist_box_x_values(input_value_2),name=input_value_2,marker=dict(color='#FF4136'))
+    trace0 = go.Box(y=artist_box_y_values(input_value),x=artist_box_x_values(input_value),name=input_value,marker=dict(color='purple'))
+    trace1 = go.Box(y=artist_box_y_values(input_value_2),x=artist_box_x_values(input_value_2),name=input_value_2,marker=dict(color='blue'))
     trace_list = [trace0, trace1]
     return generate_artist_box(trace_list)
 

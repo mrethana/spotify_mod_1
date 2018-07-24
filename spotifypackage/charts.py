@@ -30,8 +30,15 @@ updatemenus = list([
             dict(label = 'All',
                 method = 'update',
                 args = [{'visible': [True, True, True, True, True]},
-                {'title': 'Tracks by All Measures'}])
-            ]),
+                {'title': 'Tracks by All Measures'}])]),
+            font = dict(size=12),
+               direction = 'left',
+               pad = {'r': 10, 't': 10},
+               x = 0.1,
+               xanchor = 'left',
+               y = 1.3,
+               yanchor = 'top'),
+            ])
 
             #     # direction = 'down',
             # x = 0,
@@ -41,7 +48,7 @@ updatemenus = list([
             # bgcolor = 'white',
             # bordercolor = 'white',
             # fontcolor = 'black',
-             font = dict(size=16),
+             # font = dict(size=16),
         #     buttons=list([
         #     dict(args=['type', 'surface'],
         #         label='Migos',
@@ -61,8 +68,7 @@ updatemenus = list([
         # xanchor = 'left',
         # y = 1.1,
         # yanchor = 'top'
-    ),
-            ])
+
 # dates = [album.release_date for album in Album.query.all() if album.artist_id == 7]
 # steps = []
 # for i in range(len(dates)):
