@@ -2,7 +2,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import dash
 import pdb
-
+web gunicorn run:server
 
 server = Flask(__name__)
 

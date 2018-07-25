@@ -1,3 +1,4 @@
+import os
 from spotifypackage import *
 from spotifypackage.etl import *
 
