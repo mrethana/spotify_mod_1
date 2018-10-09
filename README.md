@@ -4,7 +4,7 @@
 ## Summary
 We built an interactive dashboard using Flask and Dash to analyze/visualize the difference between the musical features of 10 different artists (50 songs each) and 5 different genres. The video below shows the functionality of the Dash app:
 
-[Spotify Mod 1 Preview](https://www.youtube.com/watch?v=Yjs15D7HlTRw)
+[Spotify Mod 1 Preview](https://www.youtube.com/watch?v=js15D7HlTRw)
 
 
 ### Data Gathering and Database Relationships
