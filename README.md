@@ -9,6 +9,20 @@ We built an interactive dashboard using Flask and Dash to analyze/visualize the 
 
 ### Data Gathering and Database Relationships
 
+To seed our database we collected data from 5 of Spotify's available API's. These API's allowed us to gather data on the following:
+  + Artist's most popular tracks
+  + Information about each artist such as Spotify followers, Spotify id, popularity and genres associated.
+  + Tracks from an artist's album of our choosing
+  + Specific information on each track such as release date, featured artist, runtime, etc.
+  + Audio features of each track- we analyzed 5 main features (valence, danceability, tempo, energy, acousticness). The definitions of each metric as defined by Spotify can be found [here](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/)
+
+After analyzing all relationships needed to connect the data being scraped we used Object Oriented Programming and SQLAlchemy to create an Object-relational Database (ORD) in SQLite. All relationships can be found in the models.py file in the spotifypackage folder and an example of our classes can be found below:
+
+![alt text](https://github.com/mrethana/)
+
+
+
+
 
 ### Artist Trends
 + On average, Migos' tracks had the highest danceability which wasn't expected, given the other artists in the admittedly limited sample such as Michael Jackson.
