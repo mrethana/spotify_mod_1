@@ -2,7 +2,7 @@
 ###### Mod 1 Project: Analysis of audio features of songs for different genres, artists and tracks.
 
 ## Summary
-We built an interactive dashboard using Flask and Dash to analyze/visualize the difference between the musical features of 10 different artists (50 songs each) and 5 different genres. The video below shows the functionality of the Dash app:
+For our Module 1 Project at Flatiron School my partner and I built an interactive dashboard using Flask and Dash to analyze/visualize the difference between the musical features of 10 different artists (40 songs each) and 5 different genres. The video below shows the functionality of the Dash app:
 
 [Spotify Mod 1 Preview](https://www.youtube.com/watch?v=js15D7HlTRw)
 
