@@ -16,9 +16,9 @@ To seed our database we collected data from 5 of Spotify's available API's. Thes
   + Specific information on each track such as release date, featured artist, runtime, etc.
   + Audio features of each track- we analyzed 5 main features (valence, danceability, tempo, energy, acousticness). The definitions of each metric as defined by Spotify can be found [here](https://developer.spotify.com/documentation/web-api/reference/tracks/get-audio-features/)
 
-After analyzing all relationships needed to connect the data being scraped we used Object Oriented Programming and SQLAlchemy to create an Object-relational Database (ORD) in SQLite. All relationships can be found in the models.py file in the spotifypackage folder and an example of our classes can be found below:
+After analyzing all relationships needed to connect the data being scraped we used Object Oriented Programming and SQLAlchemy to create an Object-relational Database (ORD) in SQLite. All relationships can be found in the models.py file in the spotifypackage folder and an example of our classes can be found below.
 
-![alt text](https://github.com/mrethana/)
+![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/ORD.png?raw=True)
 
 
 
