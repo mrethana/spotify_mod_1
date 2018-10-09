@@ -20,31 +20,53 @@ After analyzing all relationships needed to connect the data being scraped we us
 
 ![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/ORD.png?raw=True)
 
-We did have a many to many relationship between the tracks and features. To satisfy this relationship we created a join table named trackfeature. This class can be found below.
+We did have a many-to-many relationship between the tracks and features. To satisfy this relationship we created a join table named trackfeature. This class can be found below.
 
 ![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/manytomany.png?raw=True)
 
 
+## Data Visualization using Plotly and Dash
 
-### Artist Trends
-+ On average, Migos' tracks had the highest danceability which wasn't expected, given the other artists in the admittedly limited sample such as Michael Jackson.
+Once our database was seeded with all relevant data we created an etl.py file to extract, transform and load our data into our Dash app to visualize pertinent information in plotly.
+
+#### Artist Trends
++ On average, Migos' tracks had the highest danceability which wasn't expected, given the other artists in the admittedly limited sample such as Michael Jackson (shown below).
 + Average acousticness tended to be fairly low for all sampled artists.
 
+![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/all_features.png?raw=True)
 
 
-### Genre Findings
+#### Genre Findings
 + Characteristics of artists within the same or similar genres varied across time.
 + Michael Jackson and Charlie Puth may both be considered high-profile solo pop artists during their respective generations. However, Jackson's songs tended to be higher in energy and valence.
 + This was also true for Migos and The Notorious B.I.G.
 This may reflect different generational preferences in musical style.
++ Surprisingly, every artist from older generations had a higher average valence (positivity) than their new-school counterpart. Shown below with Notorious B.I.G. and Migos.
 
 
-### Popular Tracks Trends
-+ Top tracks from sampled artists tended to be more high-energy and 'danceable', though the artists were diverse in genre and characteristics. Valence was more evenly distributed.
+ ![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/genres.png?raw=True)
+
+#### Popular Tracks Trends
++ Top tracks from sampled artists tended to be more high-energy and 'danceable', though the artists were diverse in genre and characteristics. Valence was more normally distributed. All distributions are shown below.
 
 
+ ![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/popular.png?raw=True)
 
-### Next Steps
+
+ + Michael Jackson's most popular songs were by far his tracks with the highest danceability. This can be seen below. The solid dots are songs that show up as top tracks on his Spotify page. The y-axis shows popularity and the x-axis shows how high danceability is.
+
+
+  ![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/tracks.png?raw=True)
+
+
+## Challenges/Next Steps
+
+#### Challenges
++ Moving forward when using the Spotify API I will use the spotipy Python library. This makes it easier to pull from each API. We had difficulty with our API key expiring. We also utilized many nested for loops slowing down our functions. Spotipy would help with this issue moving forward.
++ We only added a limited amount of artists due to this difficulty working with the API, we would like to add more artists/songs/genres to see if the initial trends we saw held up.
+
+
+#### Next Steps
 + What characterizes more popular genres, on average, vs less popular genres?
 + Do any features correlate with each other?
 + Do songs with featured artists tend to be more popular than songs with only one artist?
