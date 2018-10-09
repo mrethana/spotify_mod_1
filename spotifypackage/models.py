@@ -81,11 +81,11 @@ class Feature(db.Model):
 #     track_id = db.Column(db.Integer, db.ForeignKey('tracks.id'))
 #     genre_id = db.Column(db.Integer, db.ForeignKey('genres.id'))
 
-class PlaylistTracks(db.Model):
-    __tablename__ = 'playlist_tracks'
-    id = db.Column(db.Integer, primary_key = True)
-    playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.id'))
-    track_id = db.Column(db.Integer, db.ForeignKey('tracks.id'))
+# class PlaylistTracks(db.Model):
+#     __tablename__ = 'playlist_tracks'
+#     id = db.Column(db.Integer, primary_key = True)
+#     playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.id'))
+#     track_id = db.Column(db.Integer, db.ForeignKey('tracks.id'))
 #
 class TrackFeature(db.Model):
     __tablename__ = 'track_features'
