@@ -20,7 +20,9 @@ After analyzing all relationships needed to connect the data being scraped we us
 
 ![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/ORD.png?raw=True)
 
+We did have a many to many relationship between the tracks and features. To satisfy this relationship we created a join table named trackfeature. This class can be found below.
 
+![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/manytomany.png?raw=True)
 
 
 
