@@ -53,7 +53,7 @@ This may reflect different generational preferences in musical style.
  ![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/popular.png?raw=True)
 
 
- + Michael Jackson's most popular songs were by far his tracks with the highest danceability. This can be seen below. The solid dots are songs that show up as top tracks on his Spotify page. The y-axis shows popularity and the x-axis shows how high danceability is.
+ + This was exemplified when analyzing Michael Jackson's most popular songs. These popular tracks were tracks with high danceability. This can be seen below. The solid dots are songs that show up as top tracks on his Spotify page. The y-axis shows popularity and the x-axis shows how high danceability is.
 
 
   ![alt text](https://github.com/mrethana/spotify_mod_1/blob/master/Screenshots/tracks.png?raw=True)
